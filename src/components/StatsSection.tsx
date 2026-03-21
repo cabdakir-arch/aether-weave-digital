@@ -3,9 +3,9 @@ import { useRef, useEffect, useState } from "react";
 
 const stats = [
   { value: 142, suffix: "+", label: "Projects Delivered" },
-  { value: 3.2, suffix: "M", label: "Ad Impressions Managed" },
-  { value: 98.7, suffix: "%", label: "Client Retention" },
-  { value: 24, suffix: "/7", label: "Support Available" },
+  { value: 3.2, suffix: "M+", label: "People Reached" },
+  { value: 98, suffix: "%", label: "Client Satisfaction" },
+  { value: 5, suffix: "+", label: "Countries" },
 ];
 
 function AnimatedNumber({ value, suffix, duration = 1.5 }: { value: number; suffix: string; duration?: number }) {
@@ -41,29 +41,26 @@ const StatsSection = () => {
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <section ref={ref} className="relative py-24">
+    <section ref={ref} className="py-20 bg-foreground">
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-          className="card-surface border-glow p-8 md:p-12"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, y: 16 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.15 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.6, delay: 0.1 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-primary text-glow mb-2 font-mono">
+                <div className="text-3xl md:text-4xl font-bold text-primary mb-2 font-mono">
                   <AnimatedNumber value={stat.value} suffix={stat.suffix} />
                 </div>
-                <div className="text-sm text-muted-foreground tracking-wide">
-                  {stat.label}
-                </div>
+                <div className="text-sm text-background/60">{stat.label}</div>
               </motion.div>
             ))}
           </div>

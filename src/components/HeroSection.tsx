@@ -1,108 +1,108 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
+import heroImg from "@/assets/hero-abstract.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-bg opacity-40" />
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-grain pt-20">
+      {/* Decorative blobs */}
+      <div className="absolute top-20 right-[-10%] w-[400px] h-[400px] rounded-full bg-terracotta-light blur-[100px] opacity-60" />
+      <div className="absolute bottom-10 left-[-5%] w-[300px] h-[300px] rounded-full bg-sage-light blur-[80px] opacity-50" />
 
-      {/* Scanline effect */}
-      <div className="absolute inset-0 scanline pointer-events-none" />
+      <div className="relative z-10 container mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+          {/* Text side */}
+          <div className="order-2 lg:order-1">
+            <motion.div
+              initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0)" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="inline-flex items-center gap-2 px-4 py-2 mb-6 bg-sage-light rounded-full text-sm text-secondary-foreground font-medium"
+            >
+              <MapPin className="w-3.5 h-3.5 text-primary" />
+              Proudly serving East Africa
+            </motion.div>
 
-      {/* Floating geometric shapes */}
-      <motion.div
-        className="absolute top-[15%] left-[10%] w-20 h-20 border border-primary/20 rotate-45"
-        animate={{ y: [-10, 10, -10], rotate: [45, 48, 45] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute top-[25%] right-[15%] w-32 h-32 border border-primary/10 rounded-full"
-        animate={{ y: [10, -15, 10], scale: [1, 1.05, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-[20%] left-[20%] w-16 h-16 border border-primary/15"
-        animate={{ y: [5, -10, 5], rotate: [0, 90, 0] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute bottom-[30%] right-[10%] w-24 h-24 border border-primary/10 rotate-12"
-        animate={{ y: [-8, 12, -8], rotate: [12, 15, 12] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-      />
+            <motion.h1
+              initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0)" }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-6"
+              style={{ textWrap: "balance" }}
+            >
+              Growing brands
+              <br />
+              across{" "}
+              <span className="text-gradient-warm">East Africa</span>
+            </motion.h1>
 
-      {/* Glow orb */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.04] blur-[120px]" />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
+              style={{ textWrap: "pretty" }}
+            >
+              We help businesses in Kenya, Tanzania, Uganda, and beyond dominate social media and build world-class websites that convert.
+            </motion.p>
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        {/* Status badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-border rounded-full font-mono text-xs tracking-widest uppercase text-muted-foreground"
-        >
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          Systems Online
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col sm:flex-row items-start gap-4"
+            >
+              <button className="group flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.97]">
+                Start Your Project
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+              <button className="flex items-center gap-3 px-8 py-4 border-2 border-border text-foreground font-medium rounded-full transition-all duration-200 hover:border-primary/40 hover:bg-card active:scale-[0.97]">
+                View Our Work
+              </button>
+            </motion.div>
 
-        {/* Main headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.95] tracking-tight mb-6"
-          style={{ textWrap: "balance" }}
-        >
-          We Build
-          <br />
-          <span className="text-primary text-glow">Digital Empires</span>
-        </motion.h1>
+            {/* Trust badges */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+              className="mt-12 flex items-center gap-6 text-sm text-muted-foreground"
+            >
+              <div className="flex -space-x-2">
+                {["A", "M", "J", "S"].map((letter, i) => (
+                  <div key={i} className="w-8 h-8 rounded-full bg-card border-2 border-background flex items-center justify-center text-xs font-semibold text-foreground">
+                    {letter}
+                  </div>
+                ))}
+              </div>
+              <span>Trusted by <strong className="text-foreground">80+</strong> East African businesses</span>
+            </motion.div>
+          </div>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-xl mx-auto text-lg md:text-xl text-muted-foreground mb-12 leading-relaxed"
-          style={{ textWrap: "pretty" }}
-        >
-          Facebook management & web development, engineered for brands that refuse to blend in.
-        </motion.p>
-
-        {/* CTA buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <button className="group flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-lg transition-all duration-200 hover:shadow-[0_0_30px_hsl(52_95%_55%/0.3)] active:scale-[0.97]">
-            <Zap className="w-5 h-5" />
-            Launch Your Project
-            <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-          </button>
-          <button className="flex items-center gap-3 px-8 py-4 border border-border text-foreground font-medium rounded-lg transition-all duration-200 hover:border-primary/40 hover:bg-secondary active:scale-[0.97]">
-            Explore Services
-          </button>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
+          {/* Image side */}
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-5 h-8 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-1"
+            initial={{ opacity: 0, scale: 0.95, x: 30 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="order-1 lg:order-2 relative"
           >
-            <div className="w-1 h-2 bg-primary/60 rounded-full" />
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/10">
+              <img src={heroImg} alt="Alifle Online digital services" className="w-full h-auto" />
+            </div>
+            {/* Floating card */}
+            <motion.div
+              animate={{ y: [-6, 6, -6] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute -bottom-4 -left-4 md:bottom-8 md:-left-8 card-warm p-4 flex items-center gap-3 shadow-lg"
+            >
+              <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center text-lg">📈</div>
+              <div>
+                <div className="text-xs text-muted-foreground">Avg. Growth</div>
+                <div className="font-bold text-foreground">+340%</div>
+              </div>
+            </motion.div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
