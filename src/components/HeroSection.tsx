@@ -1,16 +1,80 @@
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin } from "lucide-react";
-import heroImg from "@/assets/hero-abstract.png";
+import { ArrowRight, MapPin, TrendingUp, Users, BarChart3 } from "lucide-react";
+import { useEffect, useState } from "react";
+
+const FloatingOrb = ({ delay, x, y, size, color }: { delay: number; x: string; y: string; size: string; color: string }) => (
+  <motion.div
+    className={`absolute ${size} rounded-full ${color} blur-[60px]`}
+    style={{ left: x, top: y }}
+    animate={{
+      scale: [1, 1.3, 1],
+      opacity: [0.3, 0.6, 0.3],
+      x: [0, 20, -10, 0],
+      y: [0, -15, 10, 0],
+    }}
+    transition={{ duration: 8, delay, repeat: Infinity, ease: "easeInOut" }}
+  />
+);
+
+const AnimatedMetric = ({ label, value, icon: Icon, delay }: { label: string; value: string; icon: any; delay: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20, filter: "blur(6px)" }}
+    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+    transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+    className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-card/80 backdrop-blur-sm border border-border/50 shadow-sm"
+  >
+    <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
+      <Icon className="w-4 h-4 text-primary" />
+    </div>
+    <div>
+      <div className="text-xs text-muted-foreground">{label}</div>
+      <div className="font-bold text-sm text-foreground">{value}</div>
+    </div>
+  </motion.div>
+);
+
+const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      let i = 0;
+      const interval = setInterval(() => {
+        setDisplayed(text.slice(0, i + 1));
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 40);
+      return () => clearInterval(interval);
+    }, delay * 1000);
+    return () => clearTimeout(timeout);
+  }, [text, delay]);
+  return <span>{displayed}<motion.span animate={{ opacity: [1, 0] }} transition={{ duration: 0.6, repeat: Infinity }} className="text-primary">|</motion.span></span>;
+};
+
+// Animated graph bars for the visual side
+const AnimatedGraph = () => (
+  <div className="flex items-end gap-2 h-32">
+    {[40, 55, 35, 70, 50, 85, 65, 95, 75, 100, 80, 90].map((h, i) => (
+      <motion.div
+        key={i}
+        className="flex-1 rounded-t-md bg-gradient-to-t from-primary/80 to-primary/20"
+        initial={{ height: 0 }}
+        animate={{ height: `${h}%` }}
+        transition={{ duration: 0.8, delay: 0.8 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      />
+    ))}
+  </div>
+);
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-grain pt-20">
-      {/* Decorative blobs */}
-      <div className="absolute top-20 right-[-10%] w-[400px] h-[400px] rounded-full bg-terracotta-light blur-[100px] opacity-60" />
-      <div className="absolute bottom-10 left-[-5%] w-[300px] h-[300px] rounded-full bg-sage-light blur-[80px] opacity-50" />
+      {/* Animated orbs */}
+      <FloatingOrb delay={0} x="70%" y="10%" size="w-[350px] h-[350px]" color="bg-terracotta-light" />
+      <FloatingOrb delay={2} x="-5%" y="60%" size="w-[250px] h-[250px]" color="bg-sage-light" />
+      <FloatingOrb delay={4} x="50%" y="70%" size="w-[200px] h-[200px]" color="bg-accent/20" />
 
       <div className="relative z-10 container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Text side */}
           <div className="order-2 lg:order-1">
             <motion.div
@@ -30,10 +94,10 @@ const HeroSection = () => {
               className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight mb-6"
               style={{ textWrap: "balance" }}
             >
-              Growing brands
+              We make your
               <br />
-              across{" "}
-              <span className="text-gradient-warm">East Africa</span>
+              Facebook{" "}
+              <span className="text-gradient-warm">unstoppable</span>
             </motion.h1>
 
             <motion.p
@@ -43,7 +107,7 @@ const HeroSection = () => {
               className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-lg"
               style={{ textWrap: "pretty" }}
             >
-              We help businesses in Kenya, Tanzania, Uganda, and beyond dominate social media and build world-class websites that convert.
+              Alifle Online helps businesses across Kenya, Tanzania, Uganda, and beyond dominate Facebook and build websites that convert visitors into loyal customers.
             </motion.p>
 
             <motion.div
@@ -53,15 +117,15 @@ const HeroSection = () => {
               className="flex flex-col sm:flex-row items-start gap-4"
             >
               <button className="group flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.97]">
-                Start Your Project
+                Grow My Business
                 <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
               </button>
               <button className="flex items-center gap-3 px-8 py-4 border-2 border-border text-foreground font-medium rounded-full transition-all duration-200 hover:border-primary/40 hover:bg-card active:scale-[0.97]">
-                View Our Work
+                See Results
               </button>
             </motion.div>
 
-            {/* Trust badges */}
+            {/* Trust line */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -70,38 +134,79 @@ const HeroSection = () => {
             >
               <div className="flex -space-x-2">
                 {["A", "M", "J", "S"].map((letter, i) => (
-                  <div key={i} className="w-8 h-8 rounded-full bg-card border-2 border-background flex items-center justify-center text-xs font-semibold text-foreground">
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 + i * 0.1, type: "spring", stiffness: 300 }}
+                    className="w-8 h-8 rounded-full bg-card border-2 border-background flex items-center justify-center text-xs font-semibold text-foreground"
+                  >
                     {letter}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
               <span>Trusted by <strong className="text-foreground">80+</strong> East African businesses</span>
             </motion.div>
           </div>
 
-          {/* Image side */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, x: 30 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="order-1 lg:order-2 relative"
-          >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-primary/10">
-              <img src={heroImg} alt="Alifle Online digital services" className="w-full h-auto" />
-            </div>
-            {/* Floating card */}
+          {/* Animated visual side — no image */}
+          <div className="order-1 lg:order-2 relative">
             <motion.div
-              animate={{ y: [-6, 6, -6] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className="absolute -bottom-4 -left-4 md:bottom-8 md:-left-8 card-warm p-4 flex items-center gap-3 shadow-lg"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="relative"
             >
-              <div className="w-10 h-10 rounded-full bg-sage-light flex items-center justify-center text-lg">📈</div>
-              <div>
-                <div className="text-xs text-muted-foreground">Avg. Growth</div>
-                <div className="font-bold text-foreground">+340%</div>
+              {/* Main animated card */}
+              <div className="card-warm p-6 md:p-8 rounded-3xl relative overflow-hidden">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-primary animate-pulse" />
+                    <span className="text-xs font-mono text-muted-foreground">Live Performance</span>
+                  </div>
+                  <span className="text-xs font-mono text-primary font-bold">+340%</span>
+                </div>
+
+                <AnimatedGraph />
+
+                <div className="mt-6 grid grid-cols-3 gap-3">
+                  {[
+                    { label: "Reach", value: "47.2K" },
+                    { label: "Engagement", value: "8.7%" },
+                    { label: "Leads", value: "312" },
+                  ].map((m, i) => (
+                    <motion.div
+                      key={m.label}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.5 + i * 0.1 }}
+                      className="text-center p-3 rounded-xl bg-background/50"
+                    >
+                      <div className="text-xs text-muted-foreground">{m.label}</div>
+                      <div className="font-bold text-sm text-foreground">{m.value}</div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
+
+              {/* Floating metrics */}
+              <motion.div
+                animate={{ y: [-6, 6, -6] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -bottom-4 -left-4 md:-bottom-2 md:-left-8"
+              >
+                <AnimatedMetric label="Ad Spend ROI" value="12.4x Return" icon={TrendingUp} delay={1.2} />
+              </motion.div>
+
+              <motion.div
+                animate={{ y: [4, -8, 4] }}
+                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -right-4 md:-top-2 md:-right-8"
+              >
+                <AnimatedMetric label="New Followers" value="+2,847/mo" icon={Users} delay={1.4} />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

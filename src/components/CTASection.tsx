@@ -8,9 +8,16 @@ const CTASection = () => {
 
   return (
     <section ref={ref} className="py-24 md:py-32 bg-grain relative overflow-hidden">
-      {/* Decorative blobs */}
-      <div className="absolute top-0 right-[-10%] w-[400px] h-[400px] rounded-full bg-terracotta-light blur-[120px] opacity-40" />
-      <div className="absolute bottom-0 left-[-5%] w-[300px] h-[300px] rounded-full bg-sage-light blur-[100px] opacity-40" />
+      <motion.div
+        className="absolute top-0 right-[-10%] w-[400px] h-[400px] rounded-full bg-terracotta-light blur-[120px] opacity-40"
+        animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-0 left-[-5%] w-[300px] h-[300px] rounded-full bg-sage-light blur-[100px] opacity-40"
+        animate={{ x: [0, -20, 0], y: [0, 15, 0] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+      />
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <motion.div
@@ -25,12 +32,12 @@ const CTASection = () => {
             className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6"
             style={{ textWrap: "balance" }}
           >
-            Ready to grow your
+            Ready to dominate
             <br />
-            business <span className="text-gradient-warm">digitally?</span>
+            Facebook <span className="text-gradient-warm">in East Africa?</span>
           </h2>
           <p className="max-w-lg mx-auto text-muted-foreground text-lg mb-10 leading-relaxed">
-            Whether you need a stunning website or a powerful Facebook strategy, Alifle Online is here for you. Let's make it happen.
+            Whether you need a powerful Facebook strategy or a stunning website, Alifle Online delivers results that grow your business. Let's make it happen.
           </p>
         </motion.div>
 

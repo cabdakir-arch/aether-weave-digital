@@ -5,10 +5,9 @@ const Footer = () => {
     <footer className="bg-foreground text-background/80 py-16">
       <div className="container mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
           <div className="md:col-span-1">
             <div className="font-bold text-xl text-background mb-4">
-              Alifle<span className="text-primary">.</span>Online
+              Alifle <span className="text-primary">Online</span>
             </div>
             <p className="text-sm text-background/50 leading-relaxed mb-4">
               Growing brands across East Africa through expert Facebook management and web development.
@@ -22,27 +21,24 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services */}
           <div>
             <h4 className="font-semibold text-background mb-4 text-sm uppercase tracking-wider">Services</h4>
             <ul className="space-y-3 text-sm">
-              {["Facebook Management", "Web Development", "Social Media Strategy", "E-Commerce Solutions"].map((s) => (
+              {["Facebook Management", "Ad Campaigns", "Web Development", "E-Commerce Solutions"].map((s) => (
                 <li key={s}><a href="#" className="hover:text-primary transition-colors duration-200">{s}</a></li>
               ))}
             </ul>
           </div>
 
-          {/* Company */}
           <div>
             <h4 className="font-semibold text-background mb-4 text-sm uppercase tracking-wider">Company</h4>
             <ul className="space-y-3 text-sm">
-              {["About Us", "Our Process", "Portfolio", "Contact"].map((s) => (
+              {["About Us", "Our Process", "Testimonials", "Contact"].map((s) => (
                 <li key={s}><a href="#" className="hover:text-primary transition-colors duration-200">{s}</a></li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="font-semibold text-background mb-4 text-sm uppercase tracking-wider">Contact</h4>
             <ul className="space-y-3 text-sm">
