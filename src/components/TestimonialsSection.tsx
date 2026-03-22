@@ -1,35 +1,39 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Star, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Facebook } from "lucide-react";
 
 const testimonials = [
   {
     name: "Amina Hassan",
     role: "CEO, Savanna Boutique",
     location: "Nairobi, Kenya",
-    text: "Alifle Online transformed our online presence completely. Our Facebook ads now reach thousands of customers across Nairobi, and our new website has tripled our online sales.",
+    text: "Alifle Online transformed our Facebook presence. Our ads now reach thousands across Nairobi, and our online sales tripled in just two months. They truly understand the East African market.",
     rating: 5,
+    service: "Facebook Management",
   },
   {
     name: "Joseph Mwangi",
     role: "Founder, TechHub Dar",
     location: "Dar es Salaam, Tanzania",
-    text: "Their understanding of the East African market is unmatched. The web app they built for us handles thousands of users daily without a hitch. Truly professional team.",
+    text: "Their Facebook ad campaigns brought us 200+ qualified leads in the first month. The targeting was so precise — every shilling was well spent. Highly recommend their services.",
     rating: 5,
+    service: "Facebook Ads",
   },
   {
     name: "Grace Nakamura",
     role: "Director, Green Farms Uganda",
     location: "Kampala, Uganda",
-    text: "Working with Alifle Online was the best decision for our business. They managed our entire Facebook presence and the engagement grew by over 400% in just three months.",
+    text: "Working with Alifle Online was the best decision for our business. They managed our entire Facebook presence and engagement grew by over 400% in three months.",
     rating: 5,
+    service: "Facebook Management",
   },
   {
     name: "Omar Said",
     role: "Owner, Spice Route Restaurant",
     location: "Mombasa, Kenya",
-    text: "From the website design to the social media campaigns, everything was delivered on time and exceeded our expectations. Our reservations have doubled since working with them.",
+    text: "From the website design to the social media campaigns, everything was delivered on time and exceeded expectations. Our reservations have doubled since working with them.",
     rating: 5,
+    service: "Web + Facebook",
   },
 ];
 
@@ -54,13 +58,13 @@ const TestimonialsSection = () => {
             Testimonials
           </span>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight" style={{ textWrap: "balance" }}>
-            Loved by businesses
+            Businesses trust us
             <br />
-            <span className="text-muted-foreground">across the region.</span>
+            <span className="text-muted-foreground">to deliver results.</span>
           </h2>
         </motion.div>
 
-        {/* Desktop: grid */}
+        {/* Desktop grid */}
         <div className="hidden md:grid md:grid-cols-2 gap-6">
           {testimonials.map((t, i) => (
             <motion.div
@@ -68,12 +72,16 @@ const TestimonialsSection = () => {
               initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
               animate={isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : {}}
               transition={{ duration: 0.7, delay: 0.15 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="card-warm p-8 relative overflow-hidden"
+              whileHover={{ y: -3 }}
+              className="card-warm p-8 relative overflow-hidden transition-shadow duration-300 hover:shadow-lg"
             >
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, si) => (
-                  <Star key={si} className="w-4 h-4 fill-accent text-accent" />
-                ))}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex gap-1">
+                  {Array.from({ length: t.rating }).map((_, si) => (
+                    <Star key={si} className="w-4 h-4 fill-accent text-accent" />
+                  ))}
+                </div>
+                <span className="text-xs font-mono text-primary/70 px-2 py-1 rounded-full bg-primary/5">{t.service}</span>
               </div>
               <p className="text-foreground leading-relaxed mb-6 italic">"{t.text}"</p>
               <div className="flex items-center gap-3">
@@ -89,7 +97,7 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* Mobile: carousel */}
+        {/* Mobile carousel */}
         <div className="md:hidden">
           <motion.div
             key={current}
@@ -98,10 +106,13 @@ const TestimonialsSection = () => {
             transition={{ duration: 0.4 }}
             className="card-warm p-6"
           >
-            <div className="flex gap-1 mb-4">
-              {Array.from({ length: testimonials[current].rating }).map((_, si) => (
-                <Star key={si} className="w-4 h-4 fill-accent text-accent" />
-              ))}
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex gap-1">
+                {Array.from({ length: testimonials[current].rating }).map((_, si) => (
+                  <Star key={si} className="w-4 h-4 fill-accent text-accent" />
+                ))}
+              </div>
+              <span className="text-xs font-mono text-primary/70">{testimonials[current].service}</span>
             </div>
             <p className="text-foreground leading-relaxed mb-6 italic text-sm">"{testimonials[current].text}"</p>
             <div className="flex items-center gap-3">

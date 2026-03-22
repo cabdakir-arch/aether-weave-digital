@@ -30,7 +30,7 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between h-16 md:h-20">
         <a href="/" className="font-bold text-xl tracking-tight text-foreground">
-          Alifle<span className="text-primary">.</span>Online
+          Alifle <span className="text-primary">Online</span>
         </a>
 
         <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
